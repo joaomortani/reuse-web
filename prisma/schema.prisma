@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ItemCondition { NEW LIKE_NEW GOOD FAIR POOR }
+enum ItemStatus { ACTIVE RESERVED EXCHANGED }
+enum ProposalStatus { PENDING ACCEPTED REJECTED CANCELLED }
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  role          String   @default("user")
+  items         Item[]
+  proposals     Proposal[] @relation("ProposalsByRequester")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Category {
+  id      String  @id @default(cuid())
+  name    String  @unique
+  slug    String  @unique
+  items   Item[]
+}
+
+model Item {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  condition   ItemCondition
+  status      ItemStatus    @default(ACTIVE)
+  ownerId     String
+  owner       User          @relation(fields: [ownerId], references: [id])
+  categoryId  String?
+  category    Category?     @relation(fields: [categoryId], references: [id])
+  images      Image[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  proposals   Proposal[]
+}
+
+model Image {
+  id      String @id @default(cuid())
+  url     String
+  itemId  String
+  item    Item   @relation(fields: [itemId], references: [id])
+}
+
+model Proposal {
+  id           String         @id @default(cuid())
+  itemId       String
+  item         Item           @relation(fields: [itemId], references: [id])
+  requesterId  String
+  requester    User           @relation("ProposalsByRequester", fields: [requesterId], references: [id])
+  message      String?
+  status       ProposalStatus @default(PENDING)
+  createdAt    DateTime       @default(now())
+}
