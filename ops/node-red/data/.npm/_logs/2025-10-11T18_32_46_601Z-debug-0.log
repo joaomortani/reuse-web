@@ -1,0 +1,333 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@8.19.4
+2 info using node@v16.20.2
+3 timing npm:load:whichnode Completed in 0ms
+4 timing config:load:defaults Completed in 1ms
+5 timing config:load:file:/usr/local/lib/node_modules/npm/npmrc Completed in 0ms
+6 timing config:load:builtin Completed in 0ms
+7 timing config:load:cli Completed in 1ms
+8 timing config:load:env Completed in 0ms
+9 timing config:load:file:/data/.npmrc Completed in 1ms
+10 timing config:load:project Completed in 1ms
+11 timing config:load:file:/usr/src/node-red/.npmrc Completed in 2ms
+12 timing config:load:user Completed in 2ms
+13 timing config:load:file:/usr/local/etc/npmrc Completed in 1ms
+14 timing config:load:global Completed in 1ms
+15 timing config:load:validate Completed in 0ms
+16 timing config:load:credentials Completed in 0ms
+17 timing config:load:setEnvs Completed in 0ms
+18 timing config:load Completed in 6ms
+19 timing npm:load:configload Completed in 6ms
+20 timing npm:load:mkdirpcache Completed in 1ms
+21 timing npm:load:mkdirplogs Completed in 1ms
+22 verbose title npm install node-red-node-ui-table
+23 verbose argv "install" "node-red-node-ui-table"
+24 timing npm:load:setTitle Completed in 1ms
+25 timing config:load:flatten Completed in 1ms
+26 timing npm:load:display Completed in 1ms
+27 verbose logfile logs-max:10 dir:/data/.npm/_logs
+28 verbose logfile /data/.npm/_logs/2025-10-11T18_32_46_601Z-debug-0.log
+29 timing npm:load:logFile Completed in 4ms
+30 timing npm:load:timers Completed in 0ms
+31 timing npm:load:configScope Completed in 0ms
+32 timing npm:load Completed in 14ms
+33 timing arborist:ctor Completed in 0ms
+34 silly logfile done cleaning log files
+35 timing idealTree:init Completed in 24ms
+36 timing idealTree:userRequests Completed in 1ms
+37 silly idealTree buildDeps
+38 silly fetch manifest node-red-node-ui-table@*
+39 http fetch GET 200 https://registry.npmjs.org/node-red-node-ui-table 856ms (cache miss)
+40 silly fetch manifest node-red-dashboard@^3.6.6
+41 http fetch GET 200 https://registry.npmjs.org/node-red-dashboard 758ms (cache miss)
+42 silly placeDep ROOT node-red-node-ui-table@0.4.5 OK for: node-red-project@0.0.1 want: *
+43 timing idealTree:#root Completed in 1627ms
+44 timing idealTree:node_modules/node-red-node-ui-table Completed in 0ms
+45 timing idealTree:buildDeps Completed in 1628ms
+46 timing idealTree:fixDepFlags Completed in 1ms
+47 timing idealTree Completed in 1655ms
+48 timing reify:loadTrees Completed in 1655ms
+49 timing reify:diffTrees Completed in 2ms
+50 silly reify moves {}
+51 timing reify:retireShallow Completed in 1ms
+52 timing reify:createSparse Completed in 25ms
+53 timing reify:loadBundles Completed in 0ms
+54 silly audit bulk request {
+54 silly audit   '@socket.io/component-emitter': [ '3.1.2' ],
+54 silly audit   '@types/cors': [ '2.8.19' ],
+54 silly audit   '@types/node': [ '24.7.2' ],
+54 silly audit   accepts: [ '1.3.8' ],
+54 silly audit   negotiator: [ '0.6.3', '0.6.4' ],
+54 silly audit   base64id: [ '2.0.0' ],
+54 silly audit   bytes: [ '3.1.2' ],
+54 silly audit   compressible: [ '2.0.18' ],
+54 silly audit   compression: [ '1.8.1' ],
+54 silly audit   cookie: [ '0.7.2' ],
+54 silly audit   cors: [ '2.8.5' ],
+54 silly audit   debug: [ '2.6.9', '4.3.7' ],
+54 silly audit   depd: [ '2.0.0' ],
+54 silly audit   destroy: [ '1.2.0' ],
+54 silly audit   'ee-first': [ '1.1.1' ],
+54 silly audit   encodeurl: [ '2.0.0', '1.0.2' ],
+54 silly audit   'engine.io': [ '6.6.4' ],
+54 silly audit   'engine.io-parser': [ '5.2.3' ],
+54 silly audit   ms: [ '2.1.3', '2.0.0' ],
+54 silly audit   'escape-html': [ '1.0.3' ],
+54 silly audit   etag: [ '1.8.1' ],
+54 silly audit   fresh: [ '0.5.2' ],
+54 silly audit   gridstack: [ '0.6.4' ],
+54 silly audit   'http-errors': [ '2.0.0' ],
+54 silly audit   inherits: [ '2.0.4' ],
+54 silly audit   jquery: [ '3.7.1' ],
+54 silly audit   mime: [ '1.6.0' ],
+54 silly audit   'mime-db': [ '1.54.0', '1.52.0' ],
+54 silly audit   'mime-types': [ '2.1.35' ],
+54 silly audit   'node-red-dashboard': [ '3.6.6' ],
+54 silly audit   'object-assign': [ '4.1.1' ],
+54 silly audit   'on-finished': [ '2.4.1' ],
+54 silly audit   'on-headers': [ '1.1.0' ],
+54 silly audit   parseurl: [ '1.3.3' ],
+54 silly audit   'range-parser': [ '1.2.1' ],
+54 silly audit   'safe-buffer': [ '5.2.1' ],
+54 silly audit   send: [ '0.19.0' ],
+54 silly audit   'serve-static': [ '1.16.2' ],
+54 silly audit   setprototypeof: [ '1.2.0' ],
+54 silly audit   'socket.io': [ '4.8.1' ],
+54 silly audit   'socket.io-adapter': [ '2.5.5' ],
+54 silly audit   'socket.io-parser': [ '4.2.4' ],
+54 silly audit   statuses: [ '2.0.1' ],
+54 silly audit   toidentifier: [ '1.0.1' ],
+54 silly audit   'undici-types': [ '7.14.0' ],
+54 silly audit   vary: [ '1.1.2' ],
+54 silly audit   ws: [ '8.17.1' ],
+54 silly audit   'node-red-node-ui-table': [ '0.4.5' ]
+54 silly audit }
+55 silly tarball no local data for toidentifier@https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz. Extracting by manifest.
+56 silly tarball no local data for socket.io-adapter@https://registry.npmjs.org/socket.io-adapter/-/socket.io-adapter-2.5.5.tgz. Extracting by manifest.
+57 silly tarball no local data for undici-types@https://registry.npmjs.org/undici-types/-/undici-types-7.14.0.tgz. Extracting by manifest.
+58 silly tarball no local data for send@https://registry.npmjs.org/send/-/send-0.19.0.tgz. Extracting by manifest.
+59 silly tarball no local data for ws@https://registry.npmjs.org/ws/-/ws-8.17.1.tgz. Extracting by manifest.
+60 silly tarball no local data for parseurl@https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz. Extracting by manifest.
+61 silly tarball no local data for on-headers@https://registry.npmjs.org/on-headers/-/on-headers-1.1.0.tgz. Extracting by manifest.
+62 silly tarball no local data for object-assign@https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz. Extracting by manifest.
+63 silly tarball no local data for node-red-dashboard@https://registry.npmjs.org/node-red-dashboard/-/node-red-dashboard-3.6.6.tgz. Extracting by manifest.
+64 silly tarball no local data for negotiator@https://registry.npmjs.org/negotiator/-/negotiator-0.6.4.tgz. Extracting by manifest.
+65 silly tarball no local data for on-finished@https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz. Extracting by manifest.
+66 silly tarball no local data for mime-types@https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz. Extracting by manifest.
+67 silly tarball no local data for mime@https://registry.npmjs.org/mime/-/mime-1.6.0.tgz. Extracting by manifest.
+68 silly tarball no local data for jquery@https://registry.npmjs.org/jquery/-/jquery-3.7.1.tgz. Extracting by manifest.
+69 silly tarball no local data for ms@https://registry.npmjs.org/ms/-/ms-2.0.0.tgz. Extracting by manifest.
+70 silly tarball no local data for engine.io-parser@https://registry.npmjs.org/engine.io-parser/-/engine.io-parser-5.2.3.tgz. Extracting by manifest.
+71 silly tarball no local data for engine.io@https://registry.npmjs.org/engine.io/-/engine.io-6.6.4.tgz. Extracting by manifest.
+72 silly tarball no local data for escape-html@https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz. Extracting by manifest.
+73 silly tarball no local data for fresh@https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz. Extracting by manifest.
+74 silly tarball no local data for encodeurl@https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz. Extracting by manifest.
+75 silly tarball no local data for etag@https://registry.npmjs.org/etag/-/etag-1.8.1.tgz. Extracting by manifest.
+76 silly tarball no local data for ee-first@https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz. Extracting by manifest.
+77 silly tarball no local data for destroy@https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz. Extracting by manifest.
+78 silly tarball no local data for cors@https://registry.npmjs.org/cors/-/cors-2.8.5.tgz. Extracting by manifest.
+79 silly tarball no local data for compressible@https://registry.npmjs.org/compressible/-/compressible-2.0.18.tgz. Extracting by manifest.
+80 silly tarball no local data for bytes@https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz. Extracting by manifest.
+81 silly tarball no local data for depd@https://registry.npmjs.org/depd/-/depd-2.0.0.tgz. Extracting by manifest.
+82 silly tarball no local data for base64id@https://registry.npmjs.org/base64id/-/base64id-2.0.0.tgz. Extracting by manifest.
+83 silly tarball no local data for accepts@https://registry.npmjs.org/accepts/-/accepts-1.3.8.tgz. Extracting by manifest.
+84 silly tarball no local data for compression@https://registry.npmjs.org/compression/-/compression-1.8.1.tgz. Extracting by manifest.
+85 silly tarball no local data for @types/node@https://registry.npmjs.org/@types/node/-/node-24.7.2.tgz. Extracting by manifest.
+86 silly tarball no local data for socket.io-parser@https://registry.npmjs.org/socket.io-parser/-/socket.io-parser-4.2.4.tgz. Extracting by manifest.
+87 silly tarball no local data for @socket.io/component-emitter@https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.2.tgz. Extracting by manifest.
+88 silly tarball no local data for socket.io@https://registry.npmjs.org/socket.io/-/socket.io-4.8.1.tgz. Extracting by manifest.
+89 silly tarball no local data for @types/cors@https://registry.npmjs.org/@types/cors/-/cors-2.8.19.tgz. Extracting by manifest.
+90 silly tarball no local data for ms@https://registry.npmjs.org/ms/-/ms-2.1.3.tgz. Extracting by manifest.
+91 silly tarball no local data for range-parser@https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz. Extracting by manifest.
+92 silly tarball no local data for debug@https://registry.npmjs.org/debug/-/debug-4.3.7.tgz. Extracting by manifest.
+93 silly tarball no local data for debug@https://registry.npmjs.org/debug/-/debug-4.3.7.tgz. Extracting by manifest.
+94 silly tarball no local data for ms@https://registry.npmjs.org/ms/-/ms-2.1.3.tgz. Extracting by manifest.
+95 silly tarball no local data for debug@https://registry.npmjs.org/debug/-/debug-4.3.7.tgz. Extracting by manifest.
+96 silly tarball no local data for node-red-node-ui-table@https://registry.npmjs.org/node-red-node-ui-table/-/node-red-node-ui-table-0.4.5.tgz. Extracting by manifest.
+97 silly tarball no local data for serve-static@https://registry.npmjs.org/serve-static/-/serve-static-1.16.2.tgz. Extracting by manifest.
+98 silly tarball no local data for safe-buffer@https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz. Extracting by manifest.
+99 silly tarball no local data for ms@https://registry.npmjs.org/ms/-/ms-2.1.3.tgz. Extracting by manifest.
+100 silly tarball no local data for ms@https://registry.npmjs.org/ms/-/ms-2.1.3.tgz. Extracting by manifest.
+101 silly tarball no local data for negotiator@https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz. Extracting by manifest.
+102 silly tarball no local data for ms@https://registry.npmjs.org/ms/-/ms-2.1.3.tgz. Extracting by manifest.
+103 silly tarball no local data for debug@https://registry.npmjs.org/debug/-/debug-4.3.7.tgz. Extracting by manifest.
+104 silly tarball no local data for mime-db@https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz. Extracting by manifest.
+105 silly tarball no local data for encodeurl@https://registry.npmjs.org/encodeurl/-/encodeurl-1.0.2.tgz. Extracting by manifest.
+106 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 244ms
+107 timing auditReport:getReport Completed in 248ms
+108 silly audit report {}
+109 timing auditReport:init Completed in 0ms
+110 timing reify:audit Completed in 250ms
+111 http fetch GET 200 https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz 314ms (cache miss)
+112 timing reifyNode:node_modules/toidentifier Completed in 337ms
+113 http fetch GET 200 https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz 355ms (cache miss)
+114 timing reifyNode:node_modules/object-assign Completed in 380ms
+115 http fetch GET 200 https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz 380ms (cache miss)
+116 timing reifyNode:node_modules/parseurl Completed in 405ms
+117 http fetch GET 200 https://registry.npmjs.org/socket.io-adapter/-/socket.io-adapter-2.5.5.tgz 394ms (cache miss)
+118 timing reifyNode:node_modules/socket.io-adapter Completed in 416ms
+119 http fetch GET 200 https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz 390ms (cache miss)
+120 timing reifyNode:node_modules/on-finished Completed in 417ms
+121 http fetch GET 200 https://registry.npmjs.org/send/-/send-0.19.0.tgz 403ms (cache miss)
+122 timing reifyNode:node_modules/send Completed in 426ms
+123 http fetch GET 200 https://registry.npmjs.org/on-headers/-/on-headers-1.1.0.tgz 424ms (cache miss)
+124 timing reifyNode:node_modules/on-headers Completed in 449ms
+125 http fetch GET 200 https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz 427ms (cache miss)
+126 timing reifyNode:node_modules/mime-types Completed in 456ms
+127 http fetch GET 200 https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz 433ms (cache miss)
+128 timing reifyNode:node_modules/escape-html Completed in 465ms
+129 http fetch GET 200 https://registry.npmjs.org/ms/-/ms-2.0.0.tgz 439ms (cache miss)
+130 timing reifyNode:node_modules/ms Completed in 469ms
+131 http fetch GET 200 https://registry.npmjs.org/base64id/-/base64id-2.0.0.tgz 441ms (cache miss)
+132 timing reifyNode:node_modules/base64id Completed in 479ms
+133 http fetch GET 200 https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz 449ms (cache miss)
+134 timing reifyNode:node_modules/encodeurl Completed in 481ms
+135 http fetch GET 200 https://registry.npmjs.org/etag/-/etag-1.8.1.tgz 456ms (cache miss)
+136 timing reifyNode:node_modules/etag Completed in 488ms
+137 http fetch GET 200 https://registry.npmjs.org/accepts/-/accepts-1.3.8.tgz 450ms (cache miss)
+138 timing reifyNode:node_modules/accepts Completed in 488ms
+139 http fetch GET 200 https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz 461ms (cache miss)
+140 timing reifyNode:node_modules/destroy Completed in 495ms
+141 http fetch GET 200 https://registry.npmjs.org/mime/-/mime-1.6.0.tgz 467ms (cache miss)
+142 timing reifyNode:node_modules/mime Completed in 495ms
+143 http fetch GET 200 https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz 464ms (cache miss)
+144 timing reifyNode:node_modules/ee-first Completed in 497ms
+145 http fetch GET 200 https://registry.npmjs.org/negotiator/-/negotiator-0.6.4.tgz 471ms (cache miss)
+146 timing reifyNode:node_modules/negotiator Completed in 497ms
+147 http fetch GET 200 https://registry.npmjs.org/compressible/-/compressible-2.0.18.tgz 462ms (cache miss)
+148 timing reifyNode:node_modules/compressible Completed in 499ms
+149 http fetch GET 200 https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz 473ms (cache miss)
+150 timing reifyNode:node_modules/fresh Completed in 504ms
+151 http fetch GET 200 https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz 468ms (cache miss)
+152 timing reifyNode:node_modules/bytes Completed in 505ms
+153 http fetch GET 200 https://registry.npmjs.org/ms/-/ms-2.1.3.tgz 469ms (cache miss)
+154 timing reifyNode:node_modules/socket.io-parser/node_modules/ms Completed in 516ms
+155 http fetch GET 200 https://registry.npmjs.org/@types/cors/-/cors-2.8.19.tgz 473ms (cache miss)
+156 timing reifyNode:node_modules/@types/cors Completed in 515ms
+157 http fetch GET 200 https://registry.npmjs.org/ms/-/ms-2.1.3.tgz 478ms (cache miss)
+158 timing reifyNode:node_modules/socket.io-adapter/node_modules/ms Completed in 522ms
+159 http fetch GET 200 https://registry.npmjs.org/ms/-/ms-2.1.3.tgz 470ms (cache miss)
+160 timing reifyNode:node_modules/send/node_modules/ms Completed in 522ms
+161 http fetch GET 200 https://registry.npmjs.org/ms/-/ms-2.1.3.tgz 475ms (cache miss)
+162 timing reifyNode:node_modules/socket.io/node_modules/ms Completed in 523ms
+163 http fetch GET 200 https://registry.npmjs.org/cors/-/cors-2.8.5.tgz 489ms (cache miss)
+164 timing reifyNode:node_modules/cors Completed in 527ms
+165 http fetch GET 200 https://registry.npmjs.org/depd/-/depd-2.0.0.tgz 490ms (cache miss)
+166 timing reifyNode:node_modules/depd Completed in 528ms
+167 http fetch GET 200 https://registry.npmjs.org/debug/-/debug-4.3.7.tgz 485ms (cache miss)
+168 timing reifyNode:node_modules/socket.io-adapter/node_modules/debug Completed in 531ms
+169 http fetch GET 200 https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz 492ms (cache miss)
+170 timing reifyNode:node_modules/range-parser Completed in 536ms
+171 http fetch GET 200 https://registry.npmjs.org/debug/-/debug-4.3.7.tgz 466ms (cache miss)
+172 timing reifyNode:node_modules/engine.io/node_modules/debug Completed in 540ms
+173 http fetch GET 200 https://registry.npmjs.org/ms/-/ms-2.1.3.tgz 483ms (cache miss)
+174 timing reifyNode:node_modules/engine.io/node_modules/ms Completed in 541ms
+175 http fetch GET 200 https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz 500ms (cache miss)
+176 timing reifyNode:node_modules/safe-buffer Completed in 549ms
+177 http fetch GET 200 https://registry.npmjs.org/compression/-/compression-1.8.1.tgz 510ms (cache miss)
+178 timing reifyNode:node_modules/compression Completed in 550ms
+179 http fetch GET 200 https://registry.npmjs.org/serve-static/-/serve-static-1.16.2.tgz 503ms (cache miss)
+180 timing reifyNode:node_modules/serve-static Completed in 550ms
+181 http fetch GET 200 https://registry.npmjs.org/debug/-/debug-4.3.7.tgz 509ms (cache miss)
+182 timing reifyNode:node_modules/socket.io-parser/node_modules/debug Completed in 553ms
+183 http fetch GET 200 https://registry.npmjs.org/debug/-/debug-4.3.7.tgz 509ms (cache miss)
+184 timing reifyNode:node_modules/socket.io/node_modules/debug Completed in 556ms
+185 http fetch GET 200 https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz 505ms (cache miss)
+186 timing reifyNode:node_modules/accepts/node_modules/negotiator Completed in 557ms
+187 http fetch GET 200 https://registry.npmjs.org/encodeurl/-/encodeurl-1.0.2.tgz 480ms (cache miss)
+188 timing reifyNode:node_modules/send/node_modules/encodeurl Completed in 561ms
+189 http fetch GET 200 https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.2.tgz 531ms (cache miss)
+190 timing reifyNode:node_modules/@socket.io/component-emitter Completed in 571ms
+191 http fetch GET 200 https://registry.npmjs.org/socket.io-parser/-/socket.io-parser-4.2.4.tgz 532ms (cache miss)
+192 timing reifyNode:node_modules/socket.io-parser Completed in 574ms
+193 http fetch GET 200 https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz 502ms (cache miss)
+194 timing reifyNode:node_modules/mime-types/node_modules/mime-db Completed in 580ms
+195 http fetch GET 200 https://registry.npmjs.org/ws/-/ws-8.17.1.tgz 559ms (cache miss)
+196 timing reifyNode:node_modules/ws Completed in 584ms
+197 http fetch GET 200 https://registry.npmjs.org/engine.io-parser/-/engine.io-parser-5.2.3.tgz 555ms (cache miss)
+198 timing reifyNode:node_modules/engine.io-parser Completed in 586ms
+199 http fetch GET 200 https://registry.npmjs.org/engine.io/-/engine.io-6.6.4.tgz 579ms (cache miss)
+200 timing reifyNode:node_modules/engine.io Completed in 611ms
+201 http fetch GET 200 https://registry.npmjs.org/undici-types/-/undici-types-7.14.0.tgz 589ms (cache miss)
+202 timing reifyNode:node_modules/undici-types Completed in 612ms
+203 http fetch GET 200 https://registry.npmjs.org/node-red-node-ui-table/-/node-red-node-ui-table-0.4.5.tgz 647ms (cache miss)
+204 timing reifyNode:node_modules/node-red-node-ui-table Completed in 696ms
+205 http fetch GET 200 https://registry.npmjs.org/socket.io/-/socket.io-4.8.1.tgz 720ms (cache miss)
+206 timing reifyNode:node_modules/socket.io Completed in 762ms
+207 http fetch GET 200 https://registry.npmjs.org/jquery/-/jquery-3.7.1.tgz 777ms (cache miss)
+208 timing reifyNode:node_modules/jquery Completed in 808ms
+209 http fetch GET 200 https://registry.npmjs.org/@types/node/-/node-24.7.2.tgz 778ms (cache miss)
+210 timing reifyNode:node_modules/@types/node Completed in 817ms
+211 http fetch GET 200 https://registry.npmjs.org/node-red-dashboard/-/node-red-dashboard-3.6.6.tgz 843ms (cache miss)
+212 warn deprecated node-red-dashboard@3.6.6: No longer maintained - please look at alternatives such as @flowfuse/node-red-dashboard or node-red-contrib-uibuilder
+213 timing reifyNode:node_modules/node-red-dashboard Completed in 870ms
+214 timing reify:unpack Completed in 871ms
+215 timing reify:unretire Completed in 0ms
+216 timing build:queue Completed in 2ms
+217 timing build:link:node_modules/mime Completed in 2ms
+218 timing build:link Completed in 2ms
+219 info run node-red-dashboard@3.6.6 postinstall node_modules/node-red-dashboard node fixgrid.js
+220 info run node-red-dashboard@3.6.6 postinstall { code: 0, signal: null }
+221 timing build:run:postinstall:node_modules/node-red-dashboard Completed in 38ms
+222 timing build:run:postinstall Completed in 38ms
+223 timing build:deps Completed in 43ms
+224 timing build Completed in 44ms
+225 timing reify:build Completed in 44ms
+226 timing reify:trash Completed in 0ms
+227 timing reify:save Completed in 10ms
+228 timing reify Completed in 2617ms
+229 silly ADD node_modules/node-red-node-ui-table
+230 silly ADD node_modules/ws
+231 silly ADD node_modules/undici-types
+232 silly ADD node_modules/toidentifier
+233 silly ADD node_modules/socket.io-parser
+234 silly ADD node_modules/socket.io-parser/node_modules/ms
+235 silly ADD node_modules/socket.io-parser/node_modules/debug
+236 silly ADD node_modules/socket.io-adapter
+237 silly ADD node_modules/socket.io-adapter/node_modules/ms
+238 silly ADD node_modules/socket.io-adapter/node_modules/debug
+239 silly ADD node_modules/socket.io
+240 silly ADD node_modules/socket.io/node_modules/ms
+241 silly ADD node_modules/socket.io/node_modules/debug
+242 silly ADD node_modules/serve-static
+243 silly ADD node_modules/send
+244 silly ADD node_modules/send/node_modules/ms
+245 silly ADD node_modules/send/node_modules/encodeurl
+246 silly ADD node_modules/safe-buffer
+247 silly ADD node_modules/range-parser
+248 silly ADD node_modules/parseurl
+249 silly ADD node_modules/on-headers
+250 silly ADD node_modules/on-finished
+251 silly ADD node_modules/object-assign
+252 silly ADD node_modules/node-red-dashboard
+253 silly ADD node_modules/negotiator
+254 silly ADD node_modules/ms
+255 silly ADD node_modules/mime-types
+256 silly ADD node_modules/mime-types/node_modules/mime-db
+257 silly ADD node_modules/mime
+258 silly ADD node_modules/jquery
+259 silly ADD node_modules/fresh
+260 silly ADD node_modules/etag
+261 silly ADD node_modules/escape-html
+262 silly ADD node_modules/engine.io-parser
+263 silly ADD node_modules/engine.io
+264 silly ADD node_modules/engine.io/node_modules/ms
+265 silly ADD node_modules/engine.io/node_modules/debug
+266 silly ADD node_modules/encodeurl
+267 silly ADD node_modules/ee-first
+268 silly ADD node_modules/destroy
+269 silly ADD node_modules/depd
+270 silly ADD node_modules/cors
+271 silly ADD node_modules/compression
+272 silly ADD node_modules/compressible
+273 silly ADD node_modules/bytes
+274 silly ADD node_modules/base64id
+275 silly ADD node_modules/accepts
+276 silly ADD node_modules/accepts/node_modules/negotiator
+277 silly ADD node_modules/@types/node
+278 silly ADD node_modules/@types/cors
+279 silly ADD node_modules/@socket.io/component-emitter
+280 timing command:install Completed in 2622ms
+281 verbose exit 0
+282 timing npm Completed in 2663ms
+283 info ok
