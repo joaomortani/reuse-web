@@ -7,9 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ItemCondition { NEW LIKE_NEW GOOD FAIR POOR }
-enum ItemStatus { ACTIVE RESERVED EXCHANGED }
-enum ProposalStatus { PENDING ACCEPTED REJECTED CANCELLED }
+
+enum ItemCondition {
+  NEW
+  LIKE_NEW
+  GOOD
+  FAIR
+  POOR
+}
+
+enum ItemStatus {
+  ACTIVE
+  RESERVED
+  EXCHANGED
+}
+
+enum ProposalStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
 
 model User {
   id            String   @id @default(cuid())
