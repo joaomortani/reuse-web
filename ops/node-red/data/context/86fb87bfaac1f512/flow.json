@@ -13,8 +13,8 @@
                 "city": "Rio",
                 "uf": "RJ"
             },
-            "created_at": "2025-10-11T19:51:58.537Z",
-            "updated_at": "2025-10-11T19:51:58.537Z"
+            "created_at": "2025-10-27T14:53:16.147Z",
+            "updated_at": "2025-10-27T14:53:16.147Z"
         },
         {
             "id": "it-2",
@@ -29,8 +29,8 @@
                 "city": "Niterói",
                 "uf": "RJ"
             },
-            "created_at": "2025-10-11T19:51:58.537Z",
-            "updated_at": "2025-10-11T19:51:58.537Z"
+            "created_at": "2025-10-27T14:53:16.147Z",
+            "updated_at": "2025-10-27T14:53:16.147Z"
         }
     ],
     "users": [
@@ -40,7 +40,7 @@
             "email": "maria@ex.com",
             "role": "user",
             "status": "active",
-            "created_at": "2025-10-11T19:51:58.537Z"
+            "created_at": "2025-10-27T14:53:16.147Z"
         },
         {
             "id": "u-2",
@@ -48,7 +48,7 @@
             "email": "joao@ex.com",
             "role": "admin",
             "status": "active",
-            "created_at": "2025-10-11T19:51:58.537Z"
+            "created_at": "2025-10-27T14:53:16.147Z"
         }
     ],
     "categories": [
