@@ -1,17 +1,33 @@
-version: "3.9"
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: reuse_postgres
-    restart: unless-stopped
+  db:
+    image: postgres:16-alpine
     environment:
-      POSTGRES_USER: reuse_user
-      POSTGRES_PASSWORD: reuse_pass
-      POSTGRES_DB: reuse_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: reuse
     ports:
       - "5432:5432"
     volumes:
-      - reuse_pg_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./backend
+      target: development
+    command: npm run dev
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/reuse?schema=public
+      NODE_ENV: development
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
 
 volumes:
-  reuse_pg_data:
+  postgres_data:
