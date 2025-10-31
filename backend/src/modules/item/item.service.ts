@@ -1,3 +1,5 @@
+import { ItemCondition } from '@prisma/client';
+
 import prisma from '../../lib/prisma';
 import type { CreateItemDTO } from './item.dto';
 
@@ -5,6 +7,9 @@ export interface ItemWithOwner {
   id: string;
   title: string;
   description: string;
+  category: string;
+  condition: ItemCondition;
+  images: string[];
   lat: number;
   lng: number;
   ownerId: string;
@@ -24,6 +29,9 @@ export const createItem = async (
     data: {
       title: data.title,
       description: data.description,
+      category: data.category,
+      condition: data.condition,
+      images: data.images ?? [],
       lat: data.lat,
       lng: data.lng,
       ownerId,
