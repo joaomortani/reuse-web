@@ -134,6 +134,40 @@ Recebe um refresh token válido e retorna um novo access token.
 
 ---
 
+## POST /auth/logout
+
+Revoga um refresh token ativo.
+
+- **Headers:** `Content-Type: application/json`
+- **Body:**
+  ```json
+  {
+    "refreshToken": "<token>"
+  }
+  ```
+
+### Resposta de sucesso (200)
+```json
+{
+  "success": true,
+  "data": {
+    "success": true
+  },
+  "error": {
+    "code": null,
+    "message": null
+  }
+}
+```
+
+### Códigos de erro
+| Status | Código                 | Mensagem              | Observação |
+| ------ | ---------------------- | --------------------- | ---------- |
+| 400    | VALIDATION_ERROR       | Validation failed     | `data.errors` contém os erros de validação por campo |
+| 500    | INTERNAL_SERVER_ERROR  | Internal server error |            |
+
+---
+
 ## GET /auth/me
 
 Retorna os dados do usuário autenticado.
