@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { authMiddleware } from '../../middleware/authMiddleware';
-import { create, list, listTop } from './item.controller';
+import { create, list, listNearby, listTop } from './item.controller';
 
 const router = express.Router();
 
