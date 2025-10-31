@@ -153,6 +153,12 @@ export const refreshAccessToken = async (refreshToken: string): Promise<string> 
   return accessToken;
 };
 
+export const logout = async (refreshToken: string): Promise<void> => {
+  await prisma.refreshToken.deleteMany({
+    where: { token: refreshToken },
+  });
+};
+
 export const getUserProfile = async (userId: string): Promise<AuthUser> => {
   const user = await prisma.user.findUnique({
     where: { id: userId },

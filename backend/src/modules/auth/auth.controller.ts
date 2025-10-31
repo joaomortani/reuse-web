@@ -8,6 +8,7 @@ import {
   getUserProfile,
   login as loginService,
   refreshAccessToken,
+  logout as logoutService,
 } from './auth.service';
 import { sendError, sendSuccess } from '../../lib/apiResponse';
 
@@ -52,6 +53,25 @@ export const refresh = async (req: Request, res: Response): Promise<void> => {
 
     if (error instanceof UnauthorizedError) {
       sendError(res, 401, { code: 'UNAUTHORIZED', message: error.message });
+      return;
+    }
+
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+  }
+};
+
+export const logout = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { refreshToken } = refreshTokenSchema.parse(req.body);
+
+    await logoutService(refreshToken);
+
+    sendSuccess(res, { success: true });
+  } catch (error) {
+    if (error instanceof ZodError) {
+      sendError(res, 400, { code: 'VALIDATION_ERROR', message: 'Validation failed' }, {
+        errors: error.flatten().fieldErrors,
+      });
       return;
     }
 
