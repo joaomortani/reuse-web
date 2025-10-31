@@ -2,7 +2,7 @@ import type { User } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 
 import prisma from '../../lib/prisma';
-import type { RegisterUserDTO } from './user.dto';
+import type { RegisterUserDTO, UpdateUserDTO } from './user.dto';
 
 export type PublicUser = Omit<User, 'passwordHash'>;
 
@@ -32,6 +32,21 @@ export const createUser = async (data: RegisterUserDTO): Promise<PublicUser> => 
       name: data.name,
       email: data.email,
       passwordHash,
+    },
+  });
+
+  const { passwordHash: _passwordHash, ...userWithoutPassword } = user;
+
+  return userWithoutPassword;
+};
+
+export const updateMe = async (userId: string, data: UpdateUserDTO): Promise<PublicUser> => {
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      ...(data.name !== undefined ? { name: data.name } : {}),
+      ...(data.bio !== undefined ? { bio: data.bio } : {}),
+      ...(data.avatarUrl !== undefined ? { avatarUrl: data.avatarUrl } : {}),
     },
   });
 
