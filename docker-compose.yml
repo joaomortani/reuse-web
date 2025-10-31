@@ -14,7 +14,7 @@ services:
     build:
       context: ./backend
       target: development
-    command: npm run dev
+    command: sh -c "npx prisma generate && npx prisma migrate dev --name init && npm run dev"
     working_dir: /app
     volumes:
       - ./backend:/app
