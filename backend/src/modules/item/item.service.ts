@@ -66,3 +66,21 @@ export const listItems = async (): Promise<ItemWithOwner[]> => {
 
   return items;
 };
+
+export const listTopItems = async (limit: number): Promise<ItemWithOwner[]> => {
+  const items = await prisma.item.findMany({
+    orderBy: { createdAt: 'desc' },
+    take: limit,
+    include: {
+      owner: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
+  });
+
+  return items;
+};
