@@ -2,6 +2,7 @@ import express from 'express';
 import type { Request, Response } from 'express';
 
 import authRouter from '../modules/auth/auth.router';
+import categoryRouter from '../modules/category/category.router';
 import itemRouter from '../modules/item/item.router';
 import userRouter from '../modules/user/user.router';
 
@@ -14,5 +15,6 @@ routes.get('/health', (_req: Request, res: Response) => {
 routes.use('/auth', authRouter);
 routes.use('/users', userRouter);
 routes.use('/items', itemRouter);
+routes.use('/categories', categoryRouter);
 
 export default routes;

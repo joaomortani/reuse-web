@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import type { Request, Response } from 'express';
 import { ZodError } from 'zod';
 
@@ -22,6 +23,11 @@ export const create = async (req: Request, res: Response): Promise<void> => {
       sendError(res, 400, { code: 'VALIDATION_ERROR', message: 'Validation failed' }, {
         errors: error.flatten().fieldErrors,
       });
+      return;
+    }
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
+      sendError(res, 400, { code: 'INVALID_CATEGORY', message: 'Category not found' });
       return;
     }
 

@@ -212,6 +212,11 @@ Cria um novo item associado ao usuário autenticado.
   {
     "title": "Geladeira",
     "description": "Geladeira em bom estado",
+    "condition": "USED",
+    "categoryId": "cat_123",
+    "images": [
+      "https://example.com/geladeira.jpg"
+    ],
     "lat": -23.561684,
     "lng": -46.625378
   }
@@ -225,8 +230,17 @@ Cria um novo item associado ao usuário autenticado.
     "id": "itm_123",
     "title": "Geladeira",
     "description": "Geladeira em bom estado",
+    "condition": "USED",
+    "images": [
+      "https://example.com/geladeira.jpg"
+    ],
     "lat": -23.561684,
     "lng": -46.625378,
+    "categoryId": "cat_123",
+    "category": {
+      "id": "cat_123",
+      "name": "Eletrodomésticos"
+    },
     "ownerId": "usr_123",
     "createdAt": "2024-01-01T00:00:00.000Z",
     "owner": {
@@ -269,6 +283,15 @@ Lista os itens disponíveis.
       "description": "Geladeira em bom estado",
       "lat": -23.561684,
       "lng": -46.625378,
+      "condition": "USED",
+      "images": [
+        "https://example.com/geladeira.jpg"
+      ],
+      "categoryId": "cat_123",
+      "category": {
+        "id": "cat_123",
+        "name": "Eletrodomésticos"
+      },
       "ownerId": "usr_123",
       "createdAt": "2024-01-01T00:00:00.000Z",
       "owner": {
@@ -276,6 +299,81 @@ Lista os itens disponíveis.
         "name": "Jane Doe",
         "email": "jane@example.com"
       }
+    }
+  ],
+  "error": {
+    "code": null,
+    "message": null
+  }
+}
+```
+
+### Códigos de erro
+| Status | Código                 | Mensagem              | Observação |
+| ------ | ---------------------- | --------------------- | ---------- |
+| 500    | INTERNAL_SERVER_ERROR  | Internal server error |            |
+
+---
+
+## POST /categories
+
+Cria uma nova categoria. Apenas usuários administradores podem acessar este endpoint.
+
+- **Headers:**
+  - `Authorization: Bearer <access token>`
+  - `Content-Type: application/json`
+- **Body:**
+  ```json
+  {
+    "name": "Eletrodomésticos"
+  }
+  ```
+
+### Resposta de sucesso (201)
+```json
+{
+  "success": true,
+  "data": {
+    "id": "cat_123",
+    "name": "Eletrodomésticos"
+  },
+  "error": {
+    "code": null,
+    "message": null
+  }
+}
+```
+
+### Códigos de erro
+| Status | Código                 | Mensagem                                 | Observação |
+| ------ | ---------------------- | ---------------------------------------- | ---------- |
+| 400    | VALIDATION_ERROR       | Validation failed                        | `data.errors` contém os erros de validação por campo |
+| 401    | UNAUTHORIZED           | Unauthorized                             |            |
+| 403    | FORBIDDEN              | Only administrators can create categories |            |
+| 409    | CONFLICT               | Category already exists                  |            |
+| 500    | INTERNAL_SERVER_ERROR  | Internal server error                    |            |
+
+---
+
+## GET /categories
+
+Lista as categorias cadastradas.
+
+- **Headers:** nenhum obrigatório
+- **Body:** nenhum
+
+### Resposta de sucesso (200)
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "cat_123",
+      "name": "Eletrodomésticos"
+    },
+    {
+      "id": "cat_456",
+      "name": "Móveis"
     }
   ],
   "error": {
