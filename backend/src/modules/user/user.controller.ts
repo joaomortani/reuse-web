@@ -3,6 +3,7 @@ import { ZodError } from 'zod';
 
 import { registerUserSchema } from './user.dto';
 import { ConflictError, createUser } from './user.service';
+import { sendError, sendSuccess } from '../../lib/apiResponse';
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -10,21 +11,20 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
     const user = await createUser(data);
 
-    res.status(201).json(user);
+    sendSuccess(res, user, 201);
   } catch (error) {
     if (error instanceof ZodError) {
-      res.status(400).json({
-        message: 'Validation failed',
+      sendError(res, 400, { code: 'VALIDATION_ERROR', message: 'Validation failed' }, {
         errors: error.flatten().fieldErrors,
       });
       return;
     }
 
     if (error instanceof ConflictError) {
-      res.status(409).json({ message: error.message });
+      sendError(res, 409, { code: 'CONFLICT', message: error.message });
       return;
     }
 
-    res.status(500).json({ message: 'Internal server error' });
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };

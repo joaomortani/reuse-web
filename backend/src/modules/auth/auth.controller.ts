@@ -9,6 +9,7 @@ import {
   login as loginService,
   refreshAccessToken,
 } from './auth.service';
+import { sendError, sendSuccess } from '../../lib/apiResponse';
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -16,22 +17,21 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     const result = await loginService(email, password);
 
-    res.json(result);
+    sendSuccess(res, result);
   } catch (error) {
     if (error instanceof ZodError) {
-      res.status(400).json({
-        message: 'Validation failed',
+      sendError(res, 400, { code: 'VALIDATION_ERROR', message: 'Validation failed' }, {
         errors: error.flatten().fieldErrors,
       });
       return;
     }
 
     if (error instanceof UnauthorizedError) {
-      res.status(401).json({ message: error.message });
+      sendError(res, 401, { code: 'UNAUTHORIZED', message: error.message });
       return;
     }
 
-    res.status(500).json({ message: 'Internal server error' });
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };
 
@@ -41,41 +41,40 @@ export const refresh = async (req: Request, res: Response): Promise<void> => {
 
     const accessToken = await refreshAccessToken(refreshToken);
 
-    res.json({ accessToken });
+    sendSuccess(res, { accessToken });
   } catch (error) {
     if (error instanceof ZodError) {
-      res.status(400).json({
-        message: 'Validation failed',
+      sendError(res, 400, { code: 'VALIDATION_ERROR', message: 'Validation failed' }, {
         errors: error.flatten().fieldErrors,
       });
       return;
     }
 
     if (error instanceof UnauthorizedError) {
-      res.status(401).json({ message: error.message });
+      sendError(res, 401, { code: 'UNAUTHORIZED', message: error.message });
       return;
     }
 
-    res.status(500).json({ message: 'Internal server error' });
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };
 
 export const me = async (req: Request, res: Response): Promise<void> => {
   if (!req.user) {
-    res.status(401).json({ message: 'Unauthorized' });
+    sendError(res, 401, { code: 'UNAUTHORIZED', message: 'Unauthorized' });
     return;
   }
 
   try {
     const user = await getUserProfile(req.user.id);
 
-    res.json(user);
+    sendSuccess(res, user);
   } catch (error) {
     if (error instanceof NotFoundError) {
-      res.status(404).json({ message: error.message });
+      sendError(res, 404, { code: 'NOT_FOUND', message: error.message });
       return;
     }
 
-    res.status(500).json({ message: 'Internal server error' });
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };
