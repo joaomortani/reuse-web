@@ -7,7 +7,10 @@ const finiteNumber = (message: string) =>
 export const createItemSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
-  category: z.string().min(1, 'Category is required'),
+  categoryId: z
+    .string({ required_error: 'Category is required' })
+    .cuid('Category must be a valid id')
+    .optional(),
   condition: z.nativeEnum(ItemCondition, {
     required_error: 'Condition is required',
     invalid_type_error: 'Condition must be a valid item condition',

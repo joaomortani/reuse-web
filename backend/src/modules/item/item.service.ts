@@ -7,13 +7,17 @@ export interface ItemWithOwner {
   id: string;
   title: string;
   description: string;
-  category: string;
   condition: ItemCondition;
   images: string[];
   lat: number;
   lng: number;
   ownerId: string;
   createdAt: Date;
+  categoryId: string | null;
+  category: {
+    id: string;
+    name: string;
+  } | null;
   owner: {
     id: string;
     name: string;
@@ -29,12 +33,12 @@ export const createItem = async (
     data: {
       title: data.title,
       description: data.description,
-      category: data.category,
       condition: data.condition,
       images: data.images ?? [],
       lat: data.lat,
       lng: data.lng,
       ownerId,
+      categoryId: data.categoryId ?? null,
     },
     include: {
       owner: {
@@ -42,6 +46,12 @@ export const createItem = async (
           id: true,
           name: true,
           email: true,
+        },
+      },
+      category: {
+        select: {
+          id: true,
+          name: true,
         },
       },
     },
@@ -59,6 +69,12 @@ export const listItems = async (): Promise<ItemWithOwner[]> => {
           id: true,
           name: true,
           email: true,
+        },
+      },
+      category: {
+        select: {
+          id: true,
+          name: true,
         },
       },
     },
