@@ -4,7 +4,7 @@ import { ZodError } from 'zod';
 
 import { sendError, sendSuccess } from '../../lib/apiResponse';
 import { createItemSchema } from './item.dto';
-import { createItem, listItems, listNearbyItems, listTopItems } from './item.service';
+import { createItem, listItems, listNearbyItems, listTopItems, listMine } from './item.service';
 
 export const create = async (req: Request, res: Response): Promise<void> => {
   if (!req.user) {
@@ -155,3 +155,9 @@ export const listTop = async (req: Request, res: Response): Promise<void> => {
     sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };
+
+export async function listMine(req, res) {
+  const userId = req.user.id; // vem do authMiddleware
+  const items = await itemService.listMine(userId);
+  return res.json({ success: true, data: items });
+}

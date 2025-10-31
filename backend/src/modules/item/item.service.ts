@@ -210,3 +210,14 @@ export const listTopItems = async (limit: number): Promise<ItemWithOwner[]> => {
 
   return items;
 };
+
+export async function listMine(userId: string) {
+  return prisma.item.findMany({
+    where: { ownerId: userId },
+    orderBy: { createdAt: 'desc' },
+    include: {
+      owner: { select: { id: true, name: true, email: true } },
+      category: true,
+    },
+  });
+}
