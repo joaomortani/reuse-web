@@ -9,6 +9,8 @@ export interface AuthUser {
   id: string;
   name: string;
   email: string;
+  bio: string | null;
+  avatarUrl: string | null;
 }
 
 export interface LoginResult {
@@ -112,6 +114,8 @@ export const login = async (email: string, password: string): Promise<LoginResul
       id: user.id,
       name: user.name,
       email: user.email,
+      bio: user.bio,
+      avatarUrl: user.avatarUrl,
     },
     accessToken,
     refreshToken,
@@ -156,6 +160,8 @@ export const getUserProfile = async (userId: string): Promise<AuthUser> => {
       id: true,
       name: true,
       email: true,
+      bio: true,
+      avatarUrl: true,
     },
   });
 

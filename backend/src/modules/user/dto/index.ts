@@ -1,2 +1,2 @@
-export { registerUserSchema } from '../user.dto';
-export type { RegisterUserDTO } from '../user.dto';
+export { registerUserSchema, updateUserSchema } from '../user.dto';
+export type { RegisterUserDTO, UpdateUserDTO } from '../user.dto';

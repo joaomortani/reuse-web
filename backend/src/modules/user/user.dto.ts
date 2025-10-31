@@ -7,3 +7,11 @@ export const registerUserSchema = z.object({
 });
 
 export type RegisterUserDTO = z.infer<typeof registerUserSchema>;
+
+export const updateUserSchema = z.object({
+  name: z.string().min(1, 'Name is required').optional(),
+  bio: z.string().optional().nullable(),
+  avatarUrl: z.string().optional().nullable(),
+});
+
+export type UpdateUserDTO = z.infer<typeof updateUserSchema>;
