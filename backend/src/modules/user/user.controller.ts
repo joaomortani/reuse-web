@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { ZodError } from 'zod';
 
 import { registerUserSchema } from './user.dto';
