@@ -1,1 +1,1 @@
-export {};
+export { register } from '../user.controller';
