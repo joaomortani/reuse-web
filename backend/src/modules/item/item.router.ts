@@ -5,6 +5,7 @@ import { create, list, listTop } from './item.controller';
 
 const router = express.Router();
 
+router.get('/nearby', listNearby);
 router.get('/', list);
 router.get('/top', listTop);
 router.post('/', authMiddleware, create);

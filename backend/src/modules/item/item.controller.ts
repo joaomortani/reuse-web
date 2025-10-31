@@ -29,9 +29,49 @@ export const create = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const list = async (_req: Request, res: Response): Promise<void> => {
+const getQueryString = (value: unknown): string | undefined => {
+  if (typeof value === 'string' && value.trim().length > 0) {
+    return value.trim();
+  }
+
+  if (Array.isArray(value) && value.length > 0) {
+    const firstValue = value[0];
+    if (typeof firstValue === 'string' && firstValue.trim().length > 0) {
+      return firstValue.trim();
+    }
+  }
+
+  return undefined;
+};
+
+const getQueryNumber = (value: unknown, defaultValue: number): number => {
+  const rawValue = Array.isArray(value) ? value[0] : value;
+  const numericValue =
+    typeof rawValue === 'string' && rawValue.trim().length > 0 ? Number(rawValue) : Number.NaN;
+
+  if (Number.isFinite(numericValue) && numericValue > 0) {
+    return numericValue;
+  }
+
+  return defaultValue;
+};
+
+export const listAll = async (req: Request, res: Response): Promise<void> => {
   try {
-    const items = await listItems();
+    const page = Math.max(1, Math.floor(getQueryNumber(req.query.page, 1)));
+    const limit = Math.max(1, Math.min(50, Math.floor(getQueryNumber(req.query.limit, 10))));
+
+    const category = getQueryString(req.query.category);
+    const ownerId = getQueryString(req.query.ownerId);
+    const search = getQueryString(req.query.search);
+
+    const items = await listItems({
+      page,
+      limit,
+      category,
+      ownerId,
+      search,
+    });
 
     sendSuccess(res, items);
   } catch (error) {
