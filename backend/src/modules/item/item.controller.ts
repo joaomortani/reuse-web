@@ -3,7 +3,7 @@ import { ZodError } from 'zod';
 
 import { sendError, sendSuccess } from '../../lib/apiResponse';
 import { createItemSchema } from './item.dto';
-import { createItem, listItems, listNearbyItems } from './item.service';
+import { createItem, listItems, listTopItems } from './item.service';
 
 export const create = async (req: Request, res: Response): Promise<void> => {
   if (!req.user) {
@@ -79,32 +79,26 @@ export const listAll = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const listNearby = async (req: Request, res: Response): Promise<void> => {
+export const listTop = async (req: Request, res: Response): Promise<void> => {
   try {
-    const lat = getQueryNumber(req.query.lat, Number.NaN);
-    const lng = getQueryNumber(req.query.lng, Number.NaN);
-    const radius = getQueryNumber(req.query.radius, Number.NaN);
+    const { limit: limitQuery } = req.query;
 
-    if (!Number.isFinite(lat) || !Number.isFinite(lng) || !Number.isFinite(radius)) {
-      sendError(res, 400, { code: 'VALIDATION_ERROR', message: 'lat, lng and radius must be valid numbers' });
-      return;
+    let limit = 5;
+
+    const limitValue = Array.isArray(limitQuery) ? limitQuery[0] : limitQuery;
+
+    if (typeof limitValue === 'string') {
+      const parsedLimit = Number.parseInt(limitValue, 10);
+
+      if (!Number.isNaN(parsedLimit) && parsedLimit > 0) {
+        limit = parsedLimit;
+      }
     }
 
-    const category = getQueryString(req.query.category);
-
-    const items = await listNearbyItems({
-      lat,
-      lng,
-      radius,
-      category,
-    });
+    const items = await listTopItems(limit);
 
     sendSuccess(res, items);
   } catch (error) {
     sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
-};
-
-export const list = async (req: Request, res: Response): Promise<void> => {
-  await listAll(req, res);
 };

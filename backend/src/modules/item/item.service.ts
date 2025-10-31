@@ -176,3 +176,21 @@ export const listNearbyItems = async (filters: NearbyItemsFilters): Promise<Item
 
   return items.filter((item) => haversineDistanceKm(lat, lng, item.lat, item.lng) <= radius);
 };
+
+export const listTopItems = async (limit: number): Promise<ItemWithOwner[]> => {
+  const items = await prisma.item.findMany({
+    orderBy: { createdAt: 'desc' },
+    take: limit,
+    include: {
+      owner: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
+    },
+  });
+
+  return items;
+};
