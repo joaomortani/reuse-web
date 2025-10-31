@@ -1,44 +1,40 @@
 import type { Request, Response } from 'express';
 import { ZodError } from 'zod';
 
-import { itemSchema } from './item.dto';
-import { createItem as createItemService, listMyItems } from './item.service';
+import { sendError, sendSuccess } from '../../lib/apiResponse';
+import { createItemSchema } from './item.dto';
+import { createItem, listItems } from './item.service';
 
-export const createItem = async (req: Request, res: Response): Promise<void> => {
+export const create = async (req: Request, res: Response): Promise<void> => {
   if (!req.user) {
-    res.status(401).json({ message: 'Unauthorized' });
+    sendError(res, 401, { code: 'UNAUTHORIZED', message: 'Unauthorized' });
     return;
   }
 
   try {
-    const data = itemSchema.parse(req.body);
-    const item = await createItemService(req.user.id, data);
+    const payload = createItemSchema.parse(req.body);
 
-    res.status(201).json(item);
+    const item = await createItem(req.user.id, payload);
+
+    sendSuccess(res, item, 201);
   } catch (error) {
     if (error instanceof ZodError) {
-      res.status(400).json({
-        message: 'Validation failed',
+      sendError(res, 400, { code: 'VALIDATION_ERROR', message: 'Validation failed' }, {
         errors: error.flatten().fieldErrors,
       });
       return;
     }
 
-    res.status(500).json({ message: 'Internal server error' });
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };
 
-export const getMyItems = async (req: Request, res: Response): Promise<void> => {
-  if (!req.user) {
-    res.status(401).json({ message: 'Unauthorized' });
-    return;
-  }
-
+export const list = async (_req: Request, res: Response): Promise<void> => {
   try {
-    const items = await listMyItems(req.user.id);
+    const items = await listItems();
 
-    res.json(items);
+    sendSuccess(res, items);
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };

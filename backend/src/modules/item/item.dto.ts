@@ -1,10 +1,13 @@
 import { z } from 'zod';
 
-export const itemSchema = z.object({
-  title: z.string().min(1, 'Title is required').max(120, 'Title must be at most 120 characters long'),
+const finiteNumber = (message: string) =>
+  z.coerce.number({ invalid_type_error: message }).refine((value) => Number.isFinite(value), message);
+
+export const createItemSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
-  lat: z.number({ invalid_type_error: 'Latitude must be a number' }),
-  lng: z.number({ invalid_type_error: 'Longitude must be a number' }),
+  lat: finiteNumber('Latitude must be a valid number'),
+  lng: finiteNumber('Longitude must be a valid number'),
 });
 
-export type ItemDTO = z.infer<typeof itemSchema>;
+export type CreateItemDTO = z.infer<typeof createItemSchema>;

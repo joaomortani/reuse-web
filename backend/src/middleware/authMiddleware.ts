@@ -2,9 +2,10 @@ import express from 'express';
 import type { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import env from '../config/env';
+import { sendError } from '../lib/apiResponse';
 
 function unauthorized(res: Response): void {
-  res.status(401).json({ message: 'Unauthorized' });
+  sendError(res, 401, { code: 'UNAUTHORIZED', message: 'Unauthorized' });
 }
 
 export function authMiddleware(

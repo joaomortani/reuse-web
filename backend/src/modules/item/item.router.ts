@@ -1,13 +1,11 @@
 import express from 'express';
 
 import { authMiddleware } from '../../middleware/authMiddleware';
-import { createItem, getMyItems } from './item.controller';
+import { create, list } from './item.controller';
 
 const router = express.Router();
 
-router.use(authMiddleware);
-
-router.post('/', createItem);
-router.get('/', getMyItems);
+router.get('/', list);
+router.post('/', authMiddleware, create);
 
 export default router;

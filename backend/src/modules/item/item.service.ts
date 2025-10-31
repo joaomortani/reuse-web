@@ -1,51 +1,58 @@
 import prisma from '../../lib/prisma';
-import type { ItemDTO } from './item.dto';
+import type { CreateItemDTO } from './item.dto';
 
-export interface ItemResponse {
+export interface ItemWithOwner {
   id: string;
   title: string;
   description: string;
   lat: number;
   lng: number;
+  ownerId: string;
   createdAt: Date;
+  owner: {
+    id: string;
+    name: string;
+    email: string;
+  };
 }
 
 export const createItem = async (
-  userId: string,
-  data: ItemDTO,
-): Promise<ItemResponse> => {
+  ownerId: string,
+  data: CreateItemDTO,
+): Promise<ItemWithOwner> => {
   const item = await prisma.item.create({
     data: {
       title: data.title,
       description: data.description,
       lat: data.lat,
       lng: data.lng,
-      ownerId: userId,
+      ownerId,
     },
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      lat: true,
-      lng: true,
-      createdAt: true,
+    include: {
+      owner: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
     },
   });
 
   return item;
 };
 
-export const listMyItems = async (userId: string): Promise<ItemResponse[]> => {
+export const listItems = async (): Promise<ItemWithOwner[]> => {
   const items = await prisma.item.findMany({
-    where: { ownerId: userId },
     orderBy: { createdAt: 'desc' },
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      lat: true,
-      lng: true,
-      createdAt: true,
+    include: {
+      owner: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      },
     },
   });
 
