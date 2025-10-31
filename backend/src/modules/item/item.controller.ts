@@ -4,7 +4,7 @@ import { ZodError } from 'zod';
 
 import { sendError, sendSuccess } from '../../lib/apiResponse';
 import { createItemSchema } from './item.dto';
-import { createItem, listItems, listTopItems } from './item.service';
+import { createItem, listItems, listNearbyItems, listTopItems } from './item.service';
 
 export const create = async (req: Request, res: Response): Promise<void> => {
   if (!req.user) {
@@ -62,7 +62,21 @@ const getQueryNumber = (value: unknown, defaultValue: number): number => {
   return defaultValue;
 };
 
-export const listAll = async (req: Request, res: Response): Promise<void> => {
+const getQueryFloat = (value: unknown): number | undefined => {
+  const rawValue = Array.isArray(value) ? value[0] : value;
+
+  if (typeof rawValue === 'string' && rawValue.trim().length > 0) {
+    const parsedValue = Number.parseFloat(rawValue);
+
+    if (!Number.isNaN(parsedValue)) {
+      return parsedValue;
+    }
+  }
+
+  return undefined;
+};
+
+export const list = async (req: Request, res: Response): Promise<void> => {
   try {
     const page = Math.max(1, Math.floor(getQueryNumber(req.query.page, 1)));
     const limit = Math.max(1, Math.min(50, Math.floor(getQueryNumber(req.query.limit, 10))));
@@ -78,6 +92,39 @@ export const listAll = async (req: Request, res: Response): Promise<void> => {
       ownerId,
       search,
     });
+
+    sendSuccess(res, items);
+  } catch (error) {
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+  }
+};
+
+export const listNearby = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const lat = getQueryFloat(req.query.lat);
+    const lng = getQueryFloat(req.query.lng);
+    const radius = getQueryFloat(req.query.radius) ?? 5;
+
+    if (
+      typeof lat !== 'number' ||
+      typeof lng !== 'number' ||
+      typeof radius !== 'number' ||
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lng) ||
+      !Number.isFinite(radius) ||
+      lat < -90 ||
+      lat > 90 ||
+      lng < -180 ||
+      lng > 180 ||
+      radius <= 0
+    ) {
+      sendError(res, 400, { code: 'INVALID_LOCATION', message: 'Invalid location parameters' });
+      return;
+    }
+
+    const category = getQueryString(req.query.category);
+
+    const items = await listNearbyItems({ lat, lng, radius, category });
 
     sendSuccess(res, items);
   } catch (error) {
