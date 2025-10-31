@@ -1,8 +1,8 @@
-import { Router } from 'express';
+import express from 'express';
 
 import { register } from './user.controller';
 
-const router = Router();
+const router = express.Router();
 
 router.post('/register', register);
 
