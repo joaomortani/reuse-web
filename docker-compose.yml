@@ -24,10 +24,23 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/reuse?schema=public
       NODE_ENV: development
+      PORT: 3000
     depends_on:
       - db
     ports:
+      - "3333:3000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    environment:
+      NODE_ENV: production
+      BACKEND_API_URL: http://api:3000
+    ports:
       - "3000:3000"
+    depends_on:
+      - api
 
 volumes:
   postgres_data:
