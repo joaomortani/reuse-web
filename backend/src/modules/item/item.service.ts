@@ -221,3 +221,14 @@ export async function listMine(userId: string) {
     },
   });
 }
+
+
+export async function getById(id: string) {
+  return prisma.item.findUnique({
+    where: { id },
+    include: {
+      owner: true,
+      category: true,
+    },
+  });
+}

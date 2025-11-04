@@ -15,6 +15,6 @@ routes.get('/health', (_req: Request, res: Response) => {
 routes.use('/auth', authRouter);
 routes.use('/users', userRouter);
 routes.use('/items', itemRouter);
-routes.use('/categories', categoryRouter);
+routes.use('/category', categoryRouter);
 
 export default routes;

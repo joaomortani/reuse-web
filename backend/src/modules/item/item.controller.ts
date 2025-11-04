@@ -156,8 +156,53 @@ export const listTop = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export async function listMine(req, res) {
-  const userId = req.user.id; // vem do authMiddleware
-  const items = await itemService.listMine(userId);
-  return res.json({ success: true, data: items });
+export const listMine = async (req: Request, res: Response): Promise<void> => {
+  if (!req.user) {
+    sendError(res, 401, { code: 'UNAUTHORIZED', message: 'Unauthorized' });
+    return;
+  }
+
+  try {
+    const items = await listMine(req.user.id);
+    sendSuccess(res, items);
+  } catch (error) {
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+  }
+};
+
+export async function getById(req: Request, res: Response): Promise<Response> {
+  const { id } = req.params;
+
+  try {
+    const item = await itemService.getById(id);
+
+    if (!item) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+        error: {
+          code: 'ITEM_NOT_FOUND',
+          message: 'Item not found',
+        },
+      });
+    }
+
+    return res.json({
+      success: true,
+      data: item,
+      error: {
+        code: null,
+        message: null,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: null,
+      error: {
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Internal server error',
+      },
+    });
+  }
 }
