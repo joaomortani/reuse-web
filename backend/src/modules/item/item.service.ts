@@ -80,7 +80,7 @@ const buildItemWhere = (filters: Omit<ListItemsFilters, 'page' | 'limit'>): Pris
   const where: Prisma.ItemWhereInput = {};
 
   if (filters.category) {
-    where.category = filters.category;
+    where.categoryId = filters.category;
   }
 
   if (filters.ownerId) {
@@ -114,6 +114,12 @@ export const listItems = async (filters: ListItemsFilters): Promise<PaginatedIte
             id: true,
             name: true,
             email: true,
+          },
+        },
+        category: {
+          select: {
+            id: true,
+            name: true,
           },
         },
       },
@@ -168,7 +174,7 @@ export const listNearbyItems = async (filters: NearbyItemsFilters): Promise<Item
   };
 
   if (category) {
-    where.category = category;
+    where.categoryId = category;
   }
 
   const items = await prisma.item.findMany({
@@ -217,18 +223,48 @@ export async function listMine(userId: string) {
     orderBy: { createdAt: 'desc' },
     include: {
       owner: { select: { id: true, name: true, email: true } },
-      category: true,
+      category: { select: { id: true, name: true } },
     },
   });
 }
 
-
-export async function getById(id: string) {
+export const getItemById = async (id: string): Promise<ItemWithOwner | null> => {
   return prisma.item.findUnique({
     where: { id },
     include: {
-      owner: true,
-      category: true,
+      owner: { select: { id: true, name: true, email: true } },
+      category: { select: { id: true, name: true } },
     },
   });
-}
+};
+
+export const updateItem = async (
+  id: string,
+  ownerId: string,
+  data: CreateItemDTO,
+): Promise<ItemWithOwner | null> => {
+  const existing = await prisma.item.findUnique({ where: { id } });
+
+  if (!existing || existing.ownerId !== ownerId) {
+    return null;
+  }
+
+  const updated = await prisma.item.update({
+    where: { id },
+    data: {
+      title: data.title,
+      description: data.description,
+      condition: data.condition,
+      images: data.images ?? [],
+      lat: data.lat,
+      lng: data.lng,
+      categoryId: data.categoryId ?? null,
+    },
+    include: {
+      owner: { select: { id: true, name: true, email: true } },
+      category: { select: { id: true, name: true } },
+    },
+  });
+
+  return updated;
+};
