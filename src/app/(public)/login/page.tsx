@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import { Alert } from '@/components/ui/Alert';
@@ -11,6 +11,7 @@ import { useAuth } from '@/modules/auth/auth-context';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { login } = useAuth();
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +24,9 @@ export default function LoginPage() {
 
     try {
       await login(form);
-      router.push('/dashboard');
+      // Redirecionar para a página original ou para o dashboard
+      const redirectTo = searchParams.get('redirect') || '/dashboard';
+      router.push(redirectTo);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Não foi possível entrar');
     } finally {
