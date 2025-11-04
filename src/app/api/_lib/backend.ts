@@ -12,8 +12,8 @@ interface BackendResponse<T> {
 
 const baseUrl = () => getBackendBaseUrl();
 
-export const setAuthCookies = (accessToken: string, refreshToken: string) => {
-  const cookieStore = cookies();
+export const setAuthCookies = async (accessToken: string, refreshToken: string) => {
+  const cookieStore = await cookies();
 
   const commonOptions = {
     httpOnly: true,
@@ -33,8 +33,8 @@ export const setAuthCookies = (accessToken: string, refreshToken: string) => {
   });
 };
 
-export const clearAuthCookies = () => {
-  const cookieStore = cookies();
+export const clearAuthCookies = async () => {
+  const cookieStore = await cookies();
   cookieStore.delete(ACCESS_TOKEN_COOKIE);
   cookieStore.delete(REFRESH_TOKEN_COOKIE);
 };
@@ -49,13 +49,14 @@ export const callBackend = async <T>(
   init: RequestInit = {},
   { requireAuth = false }: { requireAuth?: boolean } = {},
 ): Promise<BackendCallResult<T>> => {
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...(init.headers ?? {}),
+    ...(init.headers as Record<string, string> ?? {}),
   };
 
   if (requireAuth) {
-    const token = cookies().get(ACCESS_TOKEN_COOKIE)?.value;
+    const cookieStore = await cookies();
+    const token = cookieStore.get(ACCESS_TOKEN_COOKIE)?.value;
 
     if (token) {
       headers.Authorization = `Bearer ${token}`;

@@ -19,13 +19,13 @@ export async function POST(request: NextRequest) {
     );
 
     if (!result.body.success) {
-      clearAuthCookies();
+      await clearAuthCookies();
       return failure(result.status, result.body.error, result.body.data);
     }
 
     const { user, accessToken, refreshToken } = result.body.data;
 
-    setAuthCookies(accessToken, refreshToken);
+    await setAuthCookies(accessToken, refreshToken);
 
     return success(user);
   } catch (error) {

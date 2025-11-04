@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import { ZodError } from 'zod';
 
 import { registerUserSchema, updateUserSchema } from './user.dto';
-import { ConflictError, createUser, updateMe as updateMeService } from './user.service';
+import { ConflictError, createUser, listAllUsers, updateMe as updateMeService } from './user.service';
 import { sendError, sendSuccess } from '../../lib/apiResponse';
 
 export const register = async (req: Request, res: Response): Promise<void> => {
@@ -54,6 +54,16 @@ export const updateMe = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
+  }
+};
+
+export const listUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await listAllUsers();
+
+    sendSuccess(res, users);
+  } catch (error) {
     sendError(res, 500, { code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error' });
   }
 };

@@ -1,7 +1,15 @@
 {
     "apiUrl": "http://host.docker.internal:3000",
-    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWhqbzgxcHcwMDBmcnYzbnBzNm50eml6IiwiaWF0IjoxNzYyMjE1MTEwLCJleHAiOjE3NjIyMTYwMTB9.zwUsUaBfDthXRFuh5sS8mJYB9uo9vVhlUXE-4VD-H1s",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWhqbzgxcHcwMDBmcnYzbnBzNm50eml6IiwiaWF0IjoxNzYyMjY2OTg0LCJleHAiOjE3NjIyNjc4ODR9.HDEL8u4cKhNXErTOAM0bruR4J_oQCfdwoVIppMLT9Os",
     "users": [
+        {
+            "id": "u-1762267531683",
+            "name": "joaof",
+            "email": "teste@example.com",
+            "role": "user",
+            "status": "active",
+            "created_at": "2025-11-04T14:45:31.683Z"
+        },
         {
             "id": "u-1",
             "name": "Maria",

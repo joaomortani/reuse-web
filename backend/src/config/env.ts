@@ -24,7 +24,7 @@ const parsedEnv = envSchema.safeParse({
 });
 
 if (!parsedEnv.success) {
-  const formattedErrors = parsedEnv.error.errors
+  const formattedErrors = parsedEnv.error.issues
     .map((error) => `${error.path.join('.')}: ${error.message}`)
     .join('; ');
 

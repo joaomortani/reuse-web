@@ -45,12 +45,26 @@ export const updateMe = async (userId: string, data: UpdateUserDTO): Promise<Pub
     where: { id: userId },
     data: {
       ...(data.name !== undefined ? { name: data.name } : {}),
-      ...(data.bio !== undefined ? { bio: data.bio } : {}),
-      ...(data.avatarUrl !== undefined ? { avatarUrl: data.avatarUrl } : {}),
+      // bio e avatarUrl não existem no schema do Prisma
     },
   });
 
   const { passwordHash: _passwordHash, ...userWithoutPassword } = user;
 
   return userWithoutPassword;
+};
+
+export const listAllUsers = async (): Promise<PublicUser[]> => {
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  return users;
 };

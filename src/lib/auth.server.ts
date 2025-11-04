@@ -12,22 +12,22 @@ interface BackendResponse<T> {
   error: { code: string | null; message: string | null };
 }
 
-export const getTokensFromCookies = () => {
-  const cookieStore = cookies();
+export const getTokensFromCookies = async () => {
+  const cookieStore = await cookies();
   const accessToken = cookieStore.get(ACCESS_TOKEN_COOKIE)?.value ?? null;
   const refreshToken = cookieStore.get(REFRESH_TOKEN_COOKIE)?.value ?? null;
 
   return { accessToken, refreshToken };
 };
 
-export const clearTokens = () => {
-  const cookieStore = cookies();
+export const clearTokens = async () => {
+  const cookieStore = await cookies();
   cookieStore.delete(ACCESS_TOKEN_COOKIE);
   cookieStore.delete(REFRESH_TOKEN_COOKIE);
 };
 
 export const getCurrentUser = async (): Promise<User | null> => {
-  const { accessToken } = getTokensFromCookies();
+  const { accessToken } = await getTokensFromCookies();
 
   if (!accessToken) {
     return null;
@@ -45,11 +45,13 @@ export const getCurrentUser = async (): Promise<User | null> => {
 
     if (!response.ok) {
       if (response.status === 401) {
-        clearTokens();
+        await clearTokens();
         return null;
       }
 
-      throw new Error('Failed to fetch current user');
+      // Para outros erros, apenas retornar null sem logar
+      // pois isso pode ser um problema temporário de rede
+      return null;
     }
 
     const payload = (await response.json()) as BackendResponse<User>;
@@ -60,7 +62,11 @@ export const getCurrentUser = async (): Promise<User | null> => {
 
     return payload.data;
   } catch (error) {
-    console.error('Error fetching current user', error);
+    // Não logar erros aqui - são casos esperados:
+    // - Usuário não autenticado (sem token ou token inválido)
+    // - Problemas temporários de rede
+    // - Backend indisponível temporariamente
+    // Apenas retornar null silenciosamente
     return null;
   }
 };

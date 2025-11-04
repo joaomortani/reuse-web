@@ -32,13 +32,13 @@ export async function POST(request: NextRequest) {
     );
 
     if (!loginResult.body.success) {
-      clearAuthCookies();
+      await clearAuthCookies();
       return failure(loginResult.status, loginResult.body.error, loginResult.body.data);
     }
 
     const { user, accessToken, refreshToken } = loginResult.body.data;
 
-    setAuthCookies(accessToken, refreshToken);
+    await setAuthCookies(accessToken, refreshToken);
 
     return success(user);
   } catch (error) {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Alert } from '@/components/ui/Alert';
@@ -20,10 +20,13 @@ const conditions = [
   { label: 'Precisa de reparos', value: 'FAIR' },
 ];
 
-export default function EditItemPage({ params }: { params: { id: string } }) {
+export default function EditItemPage() {
+  const params = useParams<{ id: string }>();
+  const id = params?.id ?? '';
+
   const router = useRouter();
   const { categories } = useCategories();
-  const { item, loading, error: loadError } = useItem(params.id);
+  const { item, loading, error: loadError } = useItem(id);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState({
@@ -59,7 +62,7 @@ export default function EditItemPage({ params }: { params: { id: string } }) {
     setSaving(true);
 
     try {
-      await updateItem(params.id, {
+      await updateItem(id, {
         title: form.title,
         description: form.description,
         condition: form.condition as 'NEW' | 'USED' | 'GOOD' | 'FAIR',
@@ -72,7 +75,7 @@ export default function EditItemPage({ params }: { params: { id: string } }) {
           .filter((value) => value.length > 0),
       });
 
-      router.push(`/dashboard/items/${params.id}`);
+      router.push(`/dashboard/items/${id}`);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Não foi possível atualizar o item');
     } finally {

@@ -94,7 +94,14 @@ export const AuthProvider = ({ children, initialUser }: Props) => {
   }, []);
 
   useEffect(() => {
+    // Se já temos um usuário inicial do servidor, não precisamos buscar novamente
     if (initialUser) {
+      return;
+    }
+
+    // Se o status já não é 'idle', significa que já tentamos buscar ou foi definido
+    // Isso evita múltiplas tentativas de busca
+    if (status !== 'idle') {
       return;
     }
 
@@ -108,9 +115,12 @@ export const AuthProvider = ({ children, initialUser }: Props) => {
           setUser(currentUser);
           setStatus('authenticated');
         }
-      } catch {
+      } catch (err) {
+        // Erros 401 (não autenticado) são esperados e não devem ser logados
+        // Apenas definir o status como unauthenticated silenciosamente
         if (mounted) {
           setStatus('unauthenticated');
+          setUser(null);
         }
       }
     };
@@ -120,7 +130,7 @@ export const AuthProvider = ({ children, initialUser }: Props) => {
     return () => {
       mounted = false;
     };
-  }, [initialUser]);
+  }, [initialUser, status]);
 
   const value = useMemo(
     () => ({ user, status, error, login: handleLogin, logout: handleLogout, refreshUser, signup: handleSignup }),

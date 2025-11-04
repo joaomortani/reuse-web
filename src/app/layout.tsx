@@ -21,7 +21,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getCurrentUser();
+  // Buscar usuário de forma segura, sem lançar erros
+  // Se houver qualquer problema (rede, autenticação, etc), apenas retornar null
+  let user = null;
+  try {
+    user = await getCurrentUser();
+  } catch {
+    // Ignorar silenciosamente - getCurrentUser já trata todos os erros
+    // mas garantimos que nenhum erro seja propagado
+    user = null;
+  }
 
   return (
     <html lang="pt-BR">

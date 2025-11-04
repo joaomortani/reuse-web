@@ -33,6 +33,9 @@ export async function http<T>(input: string, init: RequestInit = {}): Promise<T>
     const errorMessage = payload?.error?.message ?? response.statusText ?? 'Request failed';
     const errorCode = payload?.error?.code ?? null;
     const errorDetails = payload?.data;
+    
+    // Para erros 401 (não autenticado), ainda lançar o erro
+    // mas será tratado silenciosamente no auth-context
     throw new ApiError(errorMessage, response.status, errorCode, errorDetails);
   }
 

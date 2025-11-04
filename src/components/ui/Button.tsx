@@ -41,10 +41,10 @@ export const Button = ({
     .join(' ');
 
   if (asChild && isValidElement(children)) {
-    const child = children as ReactElement;
+    const child = children as ReactElement<{ className?: string }>;
     return cloneElement(child, {
       className: [classNames, child.props.className].filter(Boolean).join(' '),
-    });
+    } as { className?: string });
   }
 
   return (
